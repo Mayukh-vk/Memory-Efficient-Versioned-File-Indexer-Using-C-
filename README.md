@@ -1,0 +1,54 @@
+**Memory Efficient Versioned File Indexer : Assignment 1 : CS253**\
+\
+This project implements a memory-efficient word-level indexer in C++. It
+processes large text-based log records incrementally using a fixed-size
+buffer (of size anywhere between 256 KB to 1024 KB) to ensure memory
+usage remains independent of the total file size. The system supports
+case-insensitive alphanumeric word matching and allows for multiple
+versioned indices to be maintained during a single execution.\
+\
+To compile the program , the following command needs to be entered in
+the terminal:\
+**g++ -o analyzer 240642_Mayukh.cpp**\
+\
+The program is designed to support three different query types :\
+**1)Word Count Query :** Returns the frequency of a specific word in a
+given file version.\
+**Example Word Query**:
+`./analyzer --file test_logs.txt --version v1 --buffer 512 --query word --word error`\
+\
+**2)Difference Query :** Computes the difference in frequency for a
+specific word between two separate file versions.\
+**Example Diff Query**:
+`./analyzer --file1 test_logs.txt --version1 v1 --file2 verbose_logs.txt --version2 v2 --buffer 512 --query diff --word warning`\
+\
+**3)Top-K Query :** Displays the top-K most frequent words in a
+specified version, sorted in descending order .\
+**Example Top-K Query**:
+`./analyzer --file verbose_logs.txt --version v2 --buffer 512 --query top --top 10`\
+\
+**Output Format**\
+For every execution, the program will output the following
+details:**1)Version Name(s)**: The identifiers associated with the
+processed files.**2)Query Result**: The specific answer to the
+requested query (frequency, top words, or difference).**3)Allocated
+Buffer Size**: The size of the fixed buffer used during processing in
+KB.**4)Total Execution Time**: The time taken to complete the operation
+in seconds.**Design Requirements Met**
+
+-   1)Object-Oriented Design: Implementation uses at least four
+    user-defined classes with distinct responsibilities .
+
+-   **2)Inheritance & Polymorphism**: Uses an abstract base class for
+    queries and derived classes for specific query types with runtime
+    polymorphism.
+
+-   **3)Fixed-Size Buffering**: Files are read in chunks/fixed buffer
+    sizes. Leftover variable ensures words split across buffer
+    boundaries are handled correctly while loading the next buffer.
+
+-   **4)Exception Handling**: The program uses try-catch blocks to
+    manage errors such as invalid buffer sizes or file access issues.\
+    \
+    \
+    \
